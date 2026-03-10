@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour {
 
     
     private float verticalRotation;
+    private float verticalRotationLimit = 60f;
 
 
     private void Awake() {
@@ -35,7 +36,7 @@ public class CameraController : MonoBehaviour {
 
         // Vertical Rotation
         verticalRotation -= yRotation;
-        verticalRotation = Mathf.Clamp(verticalRotation, -80.0f, 80.0f);
+        verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
         this.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
 
