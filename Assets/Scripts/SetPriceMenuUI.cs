@@ -59,7 +59,7 @@ public class SetPriceMenuUI : MonoBehaviour {
     }
 
     private void Update() {
-        bool isCancelPressedThisFrame = GameInput.Instance.GetCancelBool();
+        bool isCancelPressedThisFrame = GameInput.Instance.GetInteractBool();
 
         // Escape to close the UI
         if (isCancelPressedThisFrame) {

@@ -91,15 +91,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 702607080194824204, guid: cfd7f48739a87ea48b2be413ef935249, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8511558276698803242}
-    - targetCorrespondingSourceObject: {fileID: 702607080194824204, guid: cfd7f48739a87ea48b2be413ef935249, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5372649808355358562}
   m_SourcePrefab: {fileID: 100100000, guid: cfd7f48739a87ea48b2be413ef935249, type: 3}
---- !u!23 &140387278622027006 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2267065343082039423, guid: cfd7f48739a87ea48b2be413ef935249, type: 3}
-  m_PrefabInstance: {fileID: 2199158046528038017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1676698048351255693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 702607080194824204, guid: cfd7f48739a87ea48b2be413ef935249, type: 3}
@@ -118,18 +110,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Belloggs
   itemSO: {fileID: 11400000, guid: 84958bee54205064691f8183b35511ea, type: 2}
---- !u!114 &5372649808355358562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676698048351255693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f655656536f8a724ca3359f0529bb0ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChangeMaterial
-  normalMaterial: {fileID: 2100000, guid: ca844e2f908023d42938bb6ec02022e6, type: 2}
-  selectedMaterial: {fileID: 2100000, guid: ccb6061dd34e1994987db8602a570f6f, type: 2}
-  meshRenderer: {fileID: 140387278622027006}

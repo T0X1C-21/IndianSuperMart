@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour {
         Cursor.visible = false;
     }
 
-    private void Update() {
+    private void LateUpdate() {
         Look();
     }
 

@@ -11,6 +11,7 @@ public class ItemContainer : MonoBehaviour, IInteractableObject {
     [SerializeField] private Item.ItemType itemType;
     [SerializeField] private Item[] itemArray;
     [SerializeField] private new Collider collider;
+    [SerializeField] private MeshRenderer meshRenderer;
 
 
     private int currentItemIndex;
@@ -60,6 +61,10 @@ public class ItemContainer : MonoBehaviour, IInteractableObject {
 
     public Collider GetCollider() {
         return collider;
+    }
+
+    public MeshRenderer GetMeshRenderer() {
+        return meshRenderer;
     }
 
     public bool IsEmpty() {

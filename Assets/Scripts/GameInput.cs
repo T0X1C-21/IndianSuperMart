@@ -22,14 +22,12 @@ public class GameInput : MonoBehaviour {
         inputActions.Player.Run.Enable();
         inputActions.Player.Look.Enable();
         inputActions.Player.Interact.Enable();
-        inputActions.Player.Cancel.Enable();
     }
 
     private void OnDisable() {
         inputActions.Player.Run.Disable();
         inputActions.Player.Look.Disable();
         inputActions.Player.Interact.Disable();
-        inputActions.Player.Cancel.Disable();
     }
 
     public Vector2 GetRunInputVector() {
@@ -47,11 +45,10 @@ public class GameInput : MonoBehaviour {
     }
 
     public bool GetInteractBool() {
+        if (!canGiveInput) {
+            return false;
+        }
         return inputActions.Player.Interact.triggered;
-    }
-
-    public bool GetCancelBool() {
-        return inputActions.Player.Cancel.triggered;
     } 
 
     public void SetCanGiveInput(bool value) {

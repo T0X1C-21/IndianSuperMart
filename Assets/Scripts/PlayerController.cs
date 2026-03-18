@@ -3,23 +3,35 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 
-    [Header("Run Attributes")]
+    [Header("Movement Attributes")]
     [SerializeField] private float runSpeed = 1f;
+    [SerializeField] private float gravityValue = -9.8f;
 
+
+    private CharacterController characterController;
+
+
+    private void Awake() {
+        characterController = this.GetComponent<CharacterController>();
+    }
 
     private void Update() {
         Run();
     }
 
     private void Run() {
+        // Get Input from GameInputClass
         Vector2 inputVector_Normalized = GameInput.Instance.GetRunInputVector();
-        if(inputVector_Normalized == Vector2.zero) {
-            return;
-        }
 
-        Vector3 movementVector = new Vector3(inputVector_Normalized.x, 0f, inputVector_Normalized.y) * runSpeed * Time.deltaTime;
+        // Convert Input to Frame Independent Movement Vector
+        Vector3 movementVector = new Vector3(inputVector_Normalized.x, gravityValue, inputVector_Normalized.y) * runSpeed * 
+            Time.deltaTime;
 
-        this.transform.position += (this.transform.right * movementVector.x) + (this.transform.forward * movementVector.z);
+        // Convert Movement Vector to Relative to Player
+        Vector3 movementVectorRelativeToPlayer = (this.transform.right * movementVector.x) + 
+            (this.transform.up * movementVector.y) + (this.transform.forward * movementVector.z);
+
+        characterController.Move(movementVectorRelativeToPlayer);
     }
 
 

@@ -45,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour {
             interactableUI?.OnInteract();
 
 
-        } else if (RaycastAndCheckForLayer(shelfLayerMask, out hitInfo)) {
+        } else if (RaycastAndCheckForLayer(shelfLayerMask, out hitInfo) && player.GetIsCarryingSomething()) {
             // Player interacted with shelf
 
             IInteractableObject carryingInteractableObject = player.GetCarryingInteractableObject();
@@ -61,36 +61,36 @@ public class PlayerInteraction : MonoBehaviour {
                     shelfSlot.AttachObjectToFreeSlot(itemContainer.GetNextItem());
                 }
             }
-        } else if(RaycastAndCheckForLayer(groundLayerMask, out hitInfo)) {
+        } else if(RaycastAndCheckForLayer(groundLayerMask, out hitInfo) && player.GetIsCarryingSomething()) {
             // Player interacted with ground
-               if (player.GetIsCarryingSomething()) {
-                    // Player is carrying something
-                    IInteractableObject carryingInteractableObject = player.GetCarryingInteractableObject();
+            if (player.GetIsCarryingSomething()) {
+                // Player is carrying something
+                IInteractableObject carryingInteractableObject = player.GetCarryingInteractableObject();
 
-                    if(carryingInteractableObject == null) {
-                        Debug.LogWarning("PlayerInteraction | CarryingInteractableObject not found!");
+                if (carryingInteractableObject == null) {
+                    Debug.LogWarning("PlayerInteraction | CarryingInteractableObject not found!");
+                }
+
+                // Check if the picked up object is overlapping with other pickable objects
+                Collider collider = carryingInteractableObject.GetCollider();
+                Bounds bounds = collider.bounds;
+                Vector3 halfExtents = bounds.extents;
+                Vector3 placingPosition = hitInfo.point;
+                halfExtents = Vector3.Max(halfExtents, Vector3.one * 0.1f);
+
+                Collider[] overlappingColliderArray = Physics.OverlapBox(placingPosition, halfExtents,
+                    collider.transform.rotation, pickableLayerMask);
+
+                foreach (Collider overlappingCollider in overlappingColliderArray) {
+                    if (overlappingCollider != collider) {
+                        // Overlapped with other pickable object
+                        return;
                     }
+                }
 
-                    // Check if the picked up object is overlapping with other pickable objects
-                    Collider collider = carryingInteractableObject.GetCollider();
-                    Bounds bounds = collider.bounds;
-                    Vector3 halfExtents = bounds.extents;
-                    Vector3 placingPosition = hitInfo.point;
-                    halfExtents = Vector3.Max(halfExtents, Vector3.one * 0.1f);
-
-                    Collider[] overlappingColliderArray = Physics.OverlapBox(placingPosition, halfExtents, 
-                        collider.transform.rotation, pickableLayerMask);
-
-                    foreach(Collider overlappingCollider in overlappingColliderArray) {
-                        if(overlappingCollider != collider) {
-                            // Overlapped with other pickable object
-                            return;
-                        }
-                    }
-
-                    carryingInteractableObject.UnparentAndSetToPosition(placingPosition, player);
-               }
-          } 
+                carryingInteractableObject.UnparentAndSetToPosition(placingPosition, player);
+            }
+        }
     }
 
     private bool RaycastAndCheckForLayer(LayerMask layerMask, out RaycastHit hitInfo) {
