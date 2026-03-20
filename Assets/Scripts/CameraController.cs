@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour {
 
     
     private float verticalRotation;
-    private float verticalRotationLimit = 60f;
+    private float verticalRotationLimit = 80f;
 
 
     private void Awake() {

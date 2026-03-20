@@ -3,9 +3,34 @@ guid: 6e5b2f280dd6bd54c9966c93cf41b55f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AccentArea
+    second: {fileID: 2100000, guid: 3adba5b1db67ad149960ad38c25974b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BasePlastic
+    second: {fileID: 2100000, guid: 6327613b65e51204eb94e71d225883ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Railings
+    second: {fileID: 2100000, guid: c1cf8ffb56907a545bb97018c9dc0aa0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFrame
+    second: {fileID: 2100000, guid: 3b3d47f77230e1c49b5bd3d60e3c936e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TagArea
+    second: {fileID: 2100000, guid: 5500ebb311edef04c82faa4384325f0f, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

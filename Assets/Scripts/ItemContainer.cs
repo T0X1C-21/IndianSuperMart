@@ -40,7 +40,7 @@ public class ItemContainer : MonoBehaviour, IInteractableObject {
 
         player.SetIsCarryingSomething(true);
         player.SetCarryingInteractableObject(this);
-        //this.collider.enabled = false;
+        this.collider.enabled = false;
 
         OnPickedUp?.Invoke(this, EventArgs.Empty);
     }
@@ -51,10 +51,11 @@ public class ItemContainer : MonoBehaviour, IInteractableObject {
         
         this.transform.parent = null;
         this.transform.position = worldPosition;
-        //this.collider.enabled = true;
+        this.collider.enabled = true;
 
-        Vector3 directionToPlayer = player.transform.position - this.transform.position;
-        this.transform.forward = directionToPlayer.normalized;
+        //Vector3 directionToPlayer = player.transform.position - this.transform.position;
+        //this.transform.forward = directionToPlayer.normalized;
+        this.transform.forward = -player.transform.forward;
 
         OnPlacedInWorld?.Invoke(this, EventArgs.Empty);
     }
