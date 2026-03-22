@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public interface IInteractableObject { 
@@ -12,6 +13,8 @@ public interface IInteractableObject {
     public abstract void UnparentAndSetToPosition(Vector3 worldPosition, Player player);
     public Collider GetCollider();
     public MeshRenderer GetMeshRenderer();
+    public IEnumerator AnimateInteractableObjectToPlayerHand(Vector3 playerHandPosition);
+    public IEnumerator AnimateInteractableObjectToWorld(Vector3 worldPosition, Quaternion targetRotation);
 
 
 }

@@ -18,7 +18,7 @@ public class PriceTag : MonoBehaviour, InteractableUI {
     }
 
     private void Start() {
-        attachedShelfSlot.OnItemAttached += AttachedShelfSlot_OnItemAttached;
+        attachedShelfSlot.OnNewItemAttached += AttachedShelfSlot_OnItemAttached;
         //attachedShelfSlot.OnAllItemsRemoved += AttachedShelfSlot_OnAllItemsRemoved;
 
         SetPriceMenuUI.Instance.OnPriceChangedForItemSO += SetPriceMenuUI_OnPriceChangedForItemSO;
@@ -34,7 +34,7 @@ public class PriceTag : MonoBehaviour, InteractableUI {
     //    DisableItemImageAndPriceTag();
     //}
 
-    private void AttachedShelfSlot_OnItemAttached(object sender, ShelfSlot.OnItemAttachedEventArgs e) {
+    private void AttachedShelfSlot_OnItemAttached(object sender, ShelfSlot.OnNewItemAttachedEventArgs e) {
         SetItemImageAndPriceTag(e.itemSO);
     }
 

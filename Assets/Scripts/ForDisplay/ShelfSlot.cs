@@ -4,8 +4,8 @@ using UnityEngine;
 public class ShelfSlot : MonoBehaviour {
 
 
-    public event EventHandler<OnItemAttachedEventArgs> OnItemAttached;
-    public class OnItemAttachedEventArgs : EventArgs {
+    public event EventHandler<OnNewItemAttachedEventArgs> OnNewItemAttached;
+    public class OnNewItemAttachedEventArgs : EventArgs {
         public ItemSO itemSO;
     }
 
@@ -26,7 +26,7 @@ public class ShelfSlot : MonoBehaviour {
 
             itemSO = newItemSO;
 
-            OnItemAttached?.Invoke(this, new OnItemAttachedEventArgs {
+            OnNewItemAttached?.Invoke(this, new OnNewItemAttachedEventArgs {
                 itemSO = newItemSO
             });
         }
@@ -39,8 +39,7 @@ public class ShelfSlot : MonoBehaviour {
             Transform parentTransform = slotTransformArray[freeSlotTransformIndex++].transform;
 
             item.transform.parent = parentTransform;
-            item.transform.localPosition = Vector3.zero;
-            item.transform.rotation = Quaternion.Euler(0f, -180f, 0f);
+            StartCoroutine(item.AnimateItemToSlot(parentTransform.transform.position));
         }
     }
 
