@@ -12,6 +12,7 @@ public class Item : MonoBehaviour {
 
 
     [SerializeField] protected ItemSO itemSO;
+    [SerializeField] private AnimationCurve verticalAnimationCurve;
 
 
     private Vector3 defaultPosition = Vector3.zero;
@@ -26,11 +27,13 @@ public class Item : MonoBehaviour {
     public IEnumerator AnimateItemToSlot(Vector3 slotPosition) {
         Vector3 itemStartPosition = this.transform.position;
         Quaternion itemStartRotation = this.transform.rotation;
-        float animationSpeed = 5f;
+        float animationSpeed = 3f;
         float t = 0f;
         while(t <= 1f) {
             t += Time.deltaTime * animationSpeed;
-            this.transform.position = Vector3.Lerp(itemStartPosition, slotPosition, t);
+            Vector3 linearLerpedPosition = Vector3.Lerp(itemStartPosition, slotPosition, t);
+            Vector3 extraVerticalPosition = new Vector3(0f, verticalAnimationCurve.Evaluate(t), 0f);
+            this.transform.position = linearLerpedPosition + extraVerticalPosition;
             this.transform.localRotation = Quaternion.Slerp(itemStartRotation, defaultRotation, t);
             yield return null;
         }
