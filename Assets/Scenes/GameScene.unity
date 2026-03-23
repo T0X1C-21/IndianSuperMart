@@ -94,7 +94,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 73f902bbe180f2140aca742e57063cce, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: f21de533fe15be344908c1f54a607a75, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: f45bd4f8416c07044a3bdbe05d4df0f5, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -961,7 +961,7 @@ Transform:
   m_GameObject: {fileID: 495746790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1071,8 +1071,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.75
+  m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.05
@@ -3411,6 +3411,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   setPriceMenuUI: {fileID: 73058809}
+--- !u!1001 &4962284631663576965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4237007946356647063, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_Name
+      value: BillingDesk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.70710653
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071071
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750806419721531543, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
 --- !u!1001 &8675462943549060098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3648,3 +3705,4 @@ SceneRoots:
   - {fileID: 792535557}
   - {fileID: 2100772310}
   - {fileID: 902227656}
+  - {fileID: 4962284631663576965}

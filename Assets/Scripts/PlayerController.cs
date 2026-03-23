@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Awake() {
         characterController = this.GetComponent<CharacterController>();
+        characterController.enableOverlapRecovery = false;
     }
 
     private void Update() {
