@@ -39,7 +39,7 @@ public class ShelfSlot : MonoBehaviour {
             Transform parentTransform = slotTransformArray[freeSlotTransformIndex++].transform;
 
             item.transform.parent = parentTransform;
-            StartCoroutine(item.AnimateItemToSlot(parentTransform.transform.position));
+            StartCoroutine(item.AnimateItemToSlot(parentTransform.transform.position, Quaternion.identity));
         }
     }
 

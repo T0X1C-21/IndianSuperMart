@@ -16,7 +16,6 @@ public class Item : MonoBehaviour {
 
 
     private Vector3 defaultPosition = Vector3.zero;
-    private Quaternion defaultRotation = Quaternion.identity;
 
 
     private void Awake() {
@@ -24,7 +23,7 @@ public class Item : MonoBehaviour {
         itemSO.currentPrice = itemSO.averagePrice;
     }
 
-    public IEnumerator AnimateItemToSlot(Vector3 slotPosition) {
+    public IEnumerator AnimateItemToSlot(Vector3 slotPosition, Quaternion targetRotation) {
         Vector3 itemStartPosition = this.transform.position;
         Quaternion itemStartRotation = this.transform.rotation;
         float animationSpeed = 3f;
@@ -34,10 +33,10 @@ public class Item : MonoBehaviour {
             Vector3 linearLerpedPosition = Vector3.Lerp(itemStartPosition, slotPosition, t);
             Vector3 extraVerticalPosition = new Vector3(0f, verticalAnimationCurve.Evaluate(t), 0f);
             this.transform.position = linearLerpedPosition + extraVerticalPosition;
-            this.transform.localRotation = Quaternion.Slerp(itemStartRotation, defaultRotation, t);
+            this.transform.localRotation = Quaternion.Slerp(itemStartRotation, targetRotation, t);
             yield return null;
         }
-        this.transform.SetLocalPositionAndRotation(defaultPosition, defaultRotation);
+        this.transform.SetLocalPositionAndRotation(defaultPosition, targetRotation);
     }
 
     public ItemSO GetItemSO() {

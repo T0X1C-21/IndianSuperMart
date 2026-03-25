@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour {
@@ -36,10 +37,12 @@ public class PlayerInteraction : MonoBehaviour {
         if(RaycastAndCheckForLayer(interactableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
             // Player interacted with an interactable object
 
+            Debug.Log(hitInfo.collider);
+
             IInteractableObject interactableObject = hitInfo.transform.GetComponent<IInteractableObject>();
             interactableObject.Interact();
 
-        } if(RaycastAndCheckForLayer(pickableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
+        } else if(RaycastAndCheckForLayer(pickableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
             // Player interacted with an pickable object
             
             IPickableObject pickableObject = hitInfo.transform.GetComponent<IPickableObject>();
@@ -101,7 +104,7 @@ public class PlayerInteraction : MonoBehaviour {
     }
 
     private bool RaycastAndCheckForLayer(LayerMask layerMask, out RaycastHit hitInfo) {
-        return Physics.Raycast(originTransform.position, Camera.main.transform.forward, out hitInfo, 
+        return Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, 
             interactDistance, layerMask);
     }
 

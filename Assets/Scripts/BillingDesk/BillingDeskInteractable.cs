@@ -1,11 +1,17 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
 
 
+    public event EventHandler OnBillingDeskEquipped;
+    public event EventHandler OnBillingDeskUnequipped;
+
+
     [SerializeField] private GameObject attachedCamera;
     [SerializeField] private CinemachinePanTilt cinemachinePanTilt;
+    [SerializeField] private new BoxCollider collider;
 
 
     private GameInput gameInput;
@@ -31,8 +37,15 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
     }
 
     private void EnableBillingDesk() {
+        if (isBillingDeskEnabled) {
+            return;
+        }
+
         attachedCamera.SetActive(true);
         isBillingDeskEnabled = true;
+        //collider.enabled = false;
+
+        OnBillingDeskEquipped?.Invoke(this, EventArgs.Empty);
     }
 
     private void DisableBillingDesk() {
@@ -40,6 +53,9 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
         isBillingDeskEnabled = false;
         cinemachinePanTilt.PanAxis.TriggerRecentering();
         cinemachinePanTilt.TiltAxis.TriggerRecentering();
+        //collider.enabled = true;
+
+        OnBillingDeskUnequipped?.Invoke(this, EventArgs.Empty);
     }
 
 
