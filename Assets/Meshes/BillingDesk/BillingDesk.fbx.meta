@@ -3,39 +3,9 @@ guid: c56d881bbea0a7640813e594bdf33d10
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Base
-    second: {fileID: 2100000, guid: 7a48a64a401d81e4ab5b46df71309fbc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Doors
-    second: {fileID: 2100000, guid: fbbca145ffef9dc499315a78da83bfef, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GripLayer
-    second: {fileID: 2100000, guid: c2a0afb0f285cdf468d7f3a47efed2c5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalHoldables
-    second: {fileID: 2100000, guid: f524326101527ae409453b89e690efc6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WrapperInner
-    second: {fileID: 2100000, guid: 86d786735b541034b848db87eac23f0c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WrapperOuter
-    second: {fileID: 2100000, guid: 34375c82344e68940aa3bec87ad1f443, type: 2}
+  externalObjects: {}
   materials:
-    materialImportMode: 2
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1

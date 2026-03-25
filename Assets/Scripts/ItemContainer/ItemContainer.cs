@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class ItemContainer : MonoBehaviour, IInteractableObject {
+public class ItemContainer : MonoBehaviour, IPickableObject {
 
 
     public event EventHandler OnPickedUp;

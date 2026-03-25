@@ -5,6 +5,7 @@ public class PlayerInteraction : MonoBehaviour {
 
     [Header("Interaction Settings")]
     [SerializeField] private Transform originTransform;
+    [SerializeField] private LayerMask interactableLayerMask;
     [SerializeField] private LayerMask pickableLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask shelfLayerMask;
@@ -32,11 +33,17 @@ public class PlayerInteraction : MonoBehaviour {
 
         RaycastHit hitInfo;
 
-        if(RaycastAndCheckForLayer(pickableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
-            // Player interacted with a pickable object
-            
+        if(RaycastAndCheckForLayer(interactableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
+            // Player interacted with an interactable object
+
             IInteractableObject interactableObject = hitInfo.transform.GetComponent<IInteractableObject>();
-            interactableObject?.Interact(player);
+            interactableObject.Interact();
+
+        } if(RaycastAndCheckForLayer(pickableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
+            // Player interacted with an pickable object
+            
+            IPickableObject pickableObject = hitInfo.transform.GetComponent<IPickableObject>();
+            pickableObject?.Interact(player);
 
         } else if (RaycastAndCheckForLayer(interactableUILayerMask, out hitInfo)) {
             // Player interacted with world space interactable UI
@@ -48,7 +55,7 @@ public class PlayerInteraction : MonoBehaviour {
         } else if (RaycastAndCheckForLayer(shelfLayerMask, out hitInfo) && player.GetIsCarryingSomething()) {
             // Player interacted with shelf
 
-            IInteractableObject carryingInteractableObject = player.GetCarryingInteractableObject();
+            IPickableObject carryingInteractableObject = player.GetCarryingInteractableObject();
             ShelfSlot shelfSlot = hitInfo.transform.GetComponent<ShelfSlot>();
             
             if(shelfSlot == null) {
@@ -65,7 +72,7 @@ public class PlayerInteraction : MonoBehaviour {
             // Player interacted with ground
             if (player.GetIsCarryingSomething()) {
                 // Player is carrying something
-                IInteractableObject carryingInteractableObject = player.GetCarryingInteractableObject();
+                IPickableObject carryingInteractableObject = player.GetCarryingInteractableObject();
 
                 if (carryingInteractableObject == null) {
                     Debug.LogWarning("PlayerInteraction | CarryingInteractableObject not found!");

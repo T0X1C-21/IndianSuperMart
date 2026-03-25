@@ -14,7 +14,7 @@ TagManager:
   - PickableObject
   - Ground
   - Shelf
-  - 
+  - InteractableObject
   - 
   - 
   - 

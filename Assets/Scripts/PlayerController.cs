@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour {
         // Get Input from GameInputClass
         Vector2 inputVector_Normalized = GameInput.Instance.GetRunInputVector();
 
+        if(inputVector_Normalized == Vector2.zero) {
+            return;
+        }
+
         // Convert Input to Frame Independent Movement Vector
         Vector3 movementVector = new Vector3(inputVector_Normalized.x, gravityValue, inputVector_Normalized.y) * runSpeed * 
             Time.deltaTime;

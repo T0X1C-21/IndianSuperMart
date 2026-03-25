@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
 
 
     private bool isCarryingSomething;
-    private IInteractableObject carryingInteractableObject;
+    private IPickableObject carryingInteractableObject;
 
 
     private void Awake() {
@@ -39,11 +39,11 @@ public class Player : MonoBehaviour {
         isCarryingSomething = value;
     }
 
-    public IInteractableObject GetCarryingInteractableObject() {
+    public IPickableObject GetCarryingInteractableObject() {
         return carryingInteractableObject;
     }
 
-    public void SetCarryingInteractableObject(IInteractableObject interactableObject) {
+    public void SetCarryingInteractableObject(IPickableObject interactableObject) {
         carryingInteractableObject = interactableObject;
     }
 
