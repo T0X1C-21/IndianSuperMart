@@ -7,10 +7,11 @@ public class CashRegister : MonoBehaviour {
     private const string CLOSE = "close";
 
 
-    [SerializeField] private BillingDeskInteractable billingDeskInteractable;
+    [SerializeField] private BillingDesk billingDesk;
     
 
     private Animator animator;
+    private bool isOpen;
 
 
     private void Awake() {
@@ -18,16 +19,22 @@ public class CashRegister : MonoBehaviour {
     }
 
     private void Start() {
-        billingDeskInteractable.OnBillingDeskEquipped += BillingDeskInteractable_OnBillingDeskEquipped;
-        billingDeskInteractable.OnBillingDeskUnequipped += BillingDeskInteractable_OnBillingDeskUnequipped;
+        billingDesk.OnStartPaymentMode += BillingDesk_OnStartPaymentMode;
+        billingDesk.OnEndPaymentMode += BillingDesk_OnEndPaymentMode;
     }
 
-    private void BillingDeskInteractable_OnBillingDeskUnequipped(object sender, System.EventArgs e) {
-        AnimateCashShelfClose();
+    private void BillingDesk_OnEndPaymentMode(object sender, System.EventArgs e) {
+        if (isOpen) {
+            AnimateCashShelfClose();
+            isOpen = false;
+        } 
     }
 
-    private void BillingDeskInteractable_OnBillingDeskEquipped(object sender, System.EventArgs e) {
-        AnimateCashShelfOpen();
+    private void BillingDesk_OnStartPaymentMode(object sender, System.EventArgs e) {
+        if(!isOpen) {
+            AnimateCashShelfOpen();
+            isOpen = true;
+        }
     }
 
     private void AnimateCashShelfOpen() {
@@ -37,5 +44,6 @@ public class CashRegister : MonoBehaviour {
     private void AnimateCashShelfClose() {
         animator.SetTrigger(CLOSE);
     }
+
 
 }

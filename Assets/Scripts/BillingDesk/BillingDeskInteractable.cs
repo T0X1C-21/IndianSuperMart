@@ -43,7 +43,7 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
 
         attachedCamera.SetActive(true);
         isBillingDeskEnabled = true;
-        //collider.enabled = false;
+        this.collider.enabled = false;
 
         OnBillingDeskEquipped?.Invoke(this, EventArgs.Empty);
     }
@@ -53,7 +53,7 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
         isBillingDeskEnabled = false;
         cinemachinePanTilt.PanAxis.TriggerRecentering();
         cinemachinePanTilt.TiltAxis.TriggerRecentering();
-        //collider.enabled = true;
+        this.collider.enabled = true;
 
         OnBillingDeskUnequipped?.Invoke(this, EventArgs.Empty);
     }

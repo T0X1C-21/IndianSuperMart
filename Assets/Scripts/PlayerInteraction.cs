@@ -37,8 +37,6 @@ public class PlayerInteraction : MonoBehaviour {
         if(RaycastAndCheckForLayer(interactableLayerMask, out hitInfo) && !player.GetIsCarryingSomething()) {
             // Player interacted with an interactable object
 
-            Debug.Log(hitInfo.collider);
-
             IInteractableObject interactableObject = hitInfo.transform.GetComponent<IInteractableObject>();
             interactableObject.Interact();
 

@@ -3,15 +3,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 
+    public static PlayerController Instance { get; private set; }
+
+
     [Header("Movement Attributes")]
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private float gravityValue = -9.8f;
 
 
     private CharacterController characterController;
+    private bool canMove = true;
 
 
     private void Awake() {
+        Instance = this;
+
         characterController = this.GetComponent<CharacterController>();
         characterController.enableOverlapRecovery = false;
     }
@@ -21,6 +27,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Run() {
+        if (!canMove) {
+            return;
+        }
+
         // Get Input from GameInputClass
         Vector2 inputVector_Normalized = GameInput.Instance.GetRunInputVector();
 
@@ -37,6 +47,14 @@ public class PlayerController : MonoBehaviour {
             (this.transform.up * movementVector.y) + (this.transform.forward * movementVector.z);
 
         characterController.Move(movementVectorRelativeToPlayer);
+    }
+
+    public void EnableMovement() {
+        canMove = true;
+    }
+
+    public void DisableMovement() {
+        canMove = false;
     }
 
 

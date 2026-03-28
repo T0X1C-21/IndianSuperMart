@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d890344d450bcff46a1cbd1682d23796, type: 3}
+  m_Name: TwentyFive
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencySO
+  gameObject: {fileID: 3422122150110732638, guid: a5693c9b83ad8af4ea3bc9974d9e72ca, type: 3}
+  currencyType: 0
+  currencyValue: 5
+  stackOffset: 0.00775
