@@ -15,7 +15,6 @@ Material:
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   - _OCCLUSIONMAP
-  - _PARALLAXMAP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -58,11 +57,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: efddc924928e32141973db0d8669c5fc, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3dfe04d2bfafca4888b0d66a9cd1f63, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 2cf6efb704e9eed42ab94b96488067fd, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3dfe04d2bfafca4888b0d66a9cd1f63, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:

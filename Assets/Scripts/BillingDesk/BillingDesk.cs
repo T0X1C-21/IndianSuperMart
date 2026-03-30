@@ -21,8 +21,9 @@ public class BillingDesk : MonoBehaviour {
     [SerializeField] private Item[] itemArray;
 
 
-    [SerializeField] private State state;
+    private State state;
     private State previousState;
+    private bool doOnce = true;
 
 
     private void Awake() {
@@ -30,10 +31,6 @@ public class BillingDesk : MonoBehaviour {
     }
 
     private void Start() {
-        if(itemArray.Length > 0) {
-            AddItemsToBillingDesk(itemArray);
-        }
-
         billingDeskItemSlotsManager.OnAllItemsScanned += BillingDeskItemSlotsManager_OnAllItemsScanned;
 
         billingDeskInteractable.OnBillingDeskEquipped += BillingDeskInteractable_OnBillingDeskEquipped;
@@ -48,6 +45,11 @@ public class BillingDesk : MonoBehaviour {
     }
 
     private void BillingDeskInteractable_OnBillingDeskEquipped(object sender, EventArgs e) {
+        if (doOnce && itemArray.Length > 0) {
+            AddItemsToBillingDesk(itemArray);
+            doOnce = false;
+        }
+
         PlayerController.Instance.DisableMovement();
 
         if(previousState == State.Scan || previousState == State.Payment) {
@@ -64,6 +66,14 @@ public class BillingDesk : MonoBehaviour {
     public void AddItemsToBillingDesk(Item[] itemArray) {
         ChangeState(State.Scan);
         billingDeskItemSlotsManager.AddItemsToInputSlots(itemArray);
+
+        int cost = 0;
+        int count = 0;
+        foreach(Item item in itemArray) {
+            cost += item.GetItemSO().currentPrice;
+            count += 1;
+        }
+        Debug.Log(count + ", " + cost);
     }
 
     private void ChangeState(State newState) {
