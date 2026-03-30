@@ -1,4 +1,6 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BillingDesk : MonoBehaviour {
@@ -19,11 +21,16 @@ public class BillingDesk : MonoBehaviour {
     [SerializeField] private BillingDeskInteractable billingDeskInteractable;
     [SerializeField] private BillingDeskItemSlotsManager billingDeskItemSlotsManager;
     [SerializeField] private Item[] itemArray;
+    [SerializeField] private GameObject productSummaryTemplateGameObject;
+    [SerializeField] private Transform listOfSummariesTransform;
+    [SerializeField] private TextMeshProUGUI totalPriceTMP;
 
 
     private State state;
     private State previousState;
     private bool doOnce = true;
+    private List<ProductSummaryTemplate> spawnedProductSummaryTemplateList = new List<ProductSummaryTemplate>();
+    private int totalPrice = 0;
 
 
     private void Awake() {
@@ -66,14 +73,35 @@ public class BillingDesk : MonoBehaviour {
     public void AddItemsToBillingDesk(Item[] itemArray) {
         ChangeState(State.Scan);
         billingDeskItemSlotsManager.AddItemsToInputSlots(itemArray);
+        AddToBillingDeskScreenUI();
+    }
 
-        int cost = 0;
+    private void AddToBillingDeskScreenUI() { 
+        HashSet<ItemSO> itemHashSet = new HashSet<ItemSO>();
+        foreach(Item item in itemArray) {
+            ItemSO itemSO = item.GetItemSO();
+            if (!itemHashSet.Contains(itemSO)) {
+                itemHashSet.Add(itemSO);
+                AddToProductSummaryUI(itemSO);
+            }
+        }
+    }
+
+    private void AddToProductSummaryUI(ItemSO itemSO) {
         int count = 0;
         foreach(Item item in itemArray) {
-            cost += item.GetItemSO().currentPrice;
-            count += 1;
+            if(item.GetItemSO().name == itemSO.name) {
+                count++;
+            }
         }
-        Debug.Log(count + ", " + cost);
+
+        GameObject spawnedProductSummaryTemplateGameObject = Instantiate(productSummaryTemplateGameObject, 
+            listOfSummariesTransform);
+        ProductSummaryTemplate spawnedProductSummaryTemplate = 
+            spawnedProductSummaryTemplateGameObject.GetComponent<ProductSummaryTemplate>();
+        spawnedProductSummaryTemplate.SetParametersAndReturnTotal(itemSO, count, totalPrice, out totalPrice);
+        totalPriceTMP.text = "₹" + totalPrice.ToString();
+        spawnedProductSummaryTemplateList.Add(spawnedProductSummaryTemplate);
     }
 
     private void ChangeState(State newState) {
