@@ -46,6 +46,7 @@ public class BillingDesk : MonoBehaviour {
 
     private void BillingDeskInteractable_OnBillingDeskUnequipped(object sender, EventArgs e) { 
         PlayerController.Instance.EnableMovement();
+        CameraController.Instance.EnableMovement();
 
         previousState = state;
         ChangeState(State.Dead);
@@ -58,6 +59,7 @@ public class BillingDesk : MonoBehaviour {
         }
 
         PlayerController.Instance.DisableMovement();
+        CameraController.Instance.DisableMovement();
 
         if(previousState == State.Scan || previousState == State.Payment) {
             ChangeState(previousState);

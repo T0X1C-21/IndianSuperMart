@@ -3,6 +3,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
 
+    public static CameraController Instance { get; private set; }
+
+
     [Header("Camera Attributes")]
     [SerializeField] private float mouseSensitivity = 1f;
 
@@ -10,11 +13,14 @@ public class CameraController : MonoBehaviour {
     [SerializeField] private Transform playerTransform;
 
     
+    private bool canMove = true;
     private float verticalRotation;
     private float verticalRotationLimit = 80f;
 
 
     private void Awake() {
+        Instance = this;
+
         verticalRotation = this.transform.rotation.x;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -22,6 +28,9 @@ public class CameraController : MonoBehaviour {
     }
 
     private void LateUpdate() {
+        if (!canMove) {
+            return;
+        }
         Look();
     }
 
@@ -38,6 +47,14 @@ public class CameraController : MonoBehaviour {
         verticalRotation -= yRotation;
         verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
         this.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+    }
+
+    public void EnableMovement() {
+        canMove = true;
+    }
+
+    public void DisableMovement() {
+        canMove = false;
     }
 
 

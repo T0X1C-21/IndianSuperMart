@@ -38,5 +38,9 @@ public class CurrencyCollider : MonoBehaviour, IInteractableObject {
         StartCoroutine(currency.AnimateCurrencyToSlot(targetPosition, Quaternion.identity));
     }
 
+    public CurrencySO GetCurrencySO() {
+        return currencySO;
+    }
+
 
 }

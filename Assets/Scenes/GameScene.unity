@@ -559,6 +559,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585549}
+  - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: FirstPersonCamera
   m_TagString: MainCamera
@@ -717,6 +718,22 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.PhysicsRaycaster
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_MaxRayIntersections: 10
 --- !u!1 &352520096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1181,9 @@ MonoBehaviour:
   interactableUILayerMask:
     serializedVersion: 2
     m_Bits: 32
+  hoverableUILayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   interactDistance: 2
 --- !u!114 &495746796
 MonoBehaviour:
@@ -4398,9 +4418,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3217590719256534217, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
-      propertyPath: Lens.NearClipPlane
-      value: 0.01
+    - target: {fileID: 3062579165060695296, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_Center.y
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3062579165060695296, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_Center.z
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4237007946356647063, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
       propertyPath: m_Name
@@ -4430,6 +4454,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4485925707948497858, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4856586935111929163, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4477,6 +4505,34 @@ PrefabInstance:
     - target: {fileID: 6841521662537313247, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6532815
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.27059805
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6532815
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.27059805
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948003155452741220, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8678573708541885126, guid: 5f855ac74a00ace408a4ee233fd7a992, type: 3}
       propertyPath: 'itemArray.Array.data[0]'

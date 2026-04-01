@@ -1,22 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrencySlot : MonoBehaviour {
+public class CurrencySlot : MonoBehaviour, IInteractableObject {
+
+
+    [SerializeField] private CurrencyCollidersManager currencyCollidersManager;
 
 
     private float stackOffset;
-    private CurrencyValue currentCurrencyValue;
+    private CurrencySO currentCurrencySO;
     private int numberOfCurrencies = 0;
     private List<Currency> addedCurrencies = new List<Currency>();
 
 
     public void AddCurrency(Currency currency) {
-        if (currentCurrencyValue == CurrencyValue.Null) {
-            currentCurrencyValue = currency.GetCurrencySO().currencyValue;
+        if (currentCurrencySO == null) {
+            currentCurrencySO = currency.GetCurrencySO();
             stackOffset = currency.GetCurrencySO().stackOffset;
         }
 
-        if(currency.GetCurrencySO().currencyValue == currentCurrencyValue) {
+        if(currency.GetCurrencySO().currencyValue == currentCurrencySO.currencyValue) {
             addedCurrencies.Add(currency);
         } else {
             Debug.LogError($"Doesn't match current currency value in {this.name}");
@@ -24,12 +27,39 @@ public class CurrencySlot : MonoBehaviour {
     }
 
     public CurrencyValue GetCurrentCurrencyValue() {
-        return currentCurrencyValue;
+        if(currentCurrencySO == null) {
+            return CurrencyValue.Null;
+        }
+        return currentCurrencySO.currencyValue;
     }
 
     public Vector3 GetPositionToAddCurrency(out Transform parentTransform) {
         parentTransform = this.transform;
         return (this.transform.position + new Vector3(0f, numberOfCurrencies++ * stackOffset, 0f));
+    }
+
+    public void Interact() {
+        TakeCurrencyOut();
+    }
+
+    private void TakeCurrencyOut() {
+        if(currentCurrencySO == null) {
+            return;
+        }
+
+        Currency topCurrency = addedCurrencies[numberOfCurrencies - 1];
+        addedCurrencies.Remove(topCurrency);
+
+        Transform targetTransform = currencyCollidersManager.GetCorrespondingCurrencyColliderTransform
+            (currentCurrencySO.currencyValue);
+
+        StartCoroutine(topCurrency.AnimateCurrencyToDestroy(targetTransform.position, Quaternion.identity));
+
+        numberOfCurrencies--;
+        // All the currency is taken out
+        if(numberOfCurrencies == 0) {
+            currentCurrencySO = null;
+        }
     }
 
     public void ResetCurrencies() {

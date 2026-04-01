@@ -1,4 +1,3 @@
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour {
@@ -11,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask shelfLayerMask;
     [SerializeField] private LayerMask interactableUILayerMask;
+    [SerializeField] private LayerMask hoverableUILayerMask;
     [SerializeField] private float interactDistance;
 
 
@@ -23,6 +23,18 @@ public class PlayerInteraction : MonoBehaviour {
 
     private void Update() {
         Interact();
+    }
+
+    private void LateUpdate() {
+        CheckForHoverable();
+    }
+
+    private void CheckForHoverable() {
+        RaycastHit raycastHit;
+        if(RaycastAndCheckForLayer(hoverableUILayerMask, out raycastHit)) {
+            IHoverable hoverable = raycastHit.transform.GetComponent<IHoverable>();
+            hoverable.OnHover();
+        }
     }
 
     private void Interact() {
