@@ -15,6 +15,7 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
 
 
     private GameInput gameInput;
+    private Player player;
     private bool isBillingDeskEnabled;
 
 
@@ -24,6 +25,7 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
 
     private void Start() {
         gameInput = GameInput.Instance;
+        player = Player.Instance;
     }
 
     private void Update() {
@@ -33,7 +35,12 @@ public class BillingDeskInteractable : MonoBehaviour, IInteractableObject {
     }
 
     public void Interact() {
-        EnableBillingDesk();
+        float dotProductBetweenPlayerAndShoppingPC = Vector3.Dot(this.transform.forward, player.transform.forward);
+
+        float interactionThreshold = -0.5f;
+        if(dotProductBetweenPlayerAndShoppingPC < interactionThreshold) {
+            EnableBillingDesk();
+        }
     }
 
     private void EnableBillingDesk() {
