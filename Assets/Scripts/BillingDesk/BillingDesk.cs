@@ -6,6 +6,10 @@ using UnityEngine;
 public class BillingDesk : MonoBehaviour {
 
 
+    public event EventHandler<OnStartScanModeEventArgs> OnStartScanMode;
+    public class OnStartScanModeEventArgs : EventArgs {
+        public int receivedAmount;
+    }
     public event EventHandler OnStartPaymentMode;
     public event EventHandler OnEndPaymentMode;
 
@@ -63,6 +67,9 @@ public class BillingDesk : MonoBehaviour {
 
         if(previousState == State.Scan || previousState == State.Payment) {
             ChangeState(previousState);
+            OnStartScanMode?.Invoke(this, new OnStartScanModeEventArgs {
+                receivedAmount = 800
+            });
             return;
         } 
         ChangeState(State.Idle);
@@ -122,6 +129,9 @@ public class BillingDesk : MonoBehaviour {
                 if(state != State.Idle) {
                     billingDeskItemSlotsManager.EnableAllInteractions();
                 }
+                OnStartScanMode?.Invoke(this, new OnStartScanModeEventArgs {
+                    receivedAmount = 800
+                });
                 state = newState;
                 break;
             case State.Payment:

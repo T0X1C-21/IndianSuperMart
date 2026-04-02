@@ -1,8 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CurrencySlot : MonoBehaviour, IInteractableObject {
 
+
+    public event EventHandler<OnGivingAmountRemovedEventArgs> OnGivingAmountRemoved;
+    public class OnGivingAmountRemovedEventArgs : EventArgs {
+        public int givingAmountRemoved;
+    }
 
     [SerializeField] private CurrencyCollidersManager currencyCollidersManager;
 
@@ -49,6 +55,10 @@ public class CurrencySlot : MonoBehaviour, IInteractableObject {
 
         Currency topCurrency = addedCurrencies[numberOfCurrencies - 1];
         addedCurrencies.Remove(topCurrency);
+
+        OnGivingAmountRemoved?.Invoke(this, new OnGivingAmountRemovedEventArgs {
+            givingAmountRemoved = topCurrency.GetCurrencySO().currencyAmount
+        });
 
         Transform targetTransform = currencyCollidersManager.GetCorrespondingCurrencyColliderTransform
             (currentCurrencySO.currencyValue);

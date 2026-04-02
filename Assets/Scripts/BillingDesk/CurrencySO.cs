@@ -26,6 +26,7 @@ public class CurrencySO : ScriptableObject {
     
 
     public GameObject gameObject;
+    public int currencyAmount;
     public CurrencyType currencyType;
     public CurrencyValue currencyValue;
     public float stackOffset;

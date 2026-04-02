@@ -1,6 +1,13 @@
+using System;
 using UnityEngine;
 
 public class BillingDeskInputSlot : MonoBehaviour, IInteractableObject {
+
+
+    public event EventHandler<OnItemScannedEventArgs> OnItemScanned;
+    public class OnItemScannedEventArgs : EventArgs {
+        public int itemPriceAmount;
+    }
 
 
     [SerializeField] BillingDeskItemSlotsManager billingDeskItemSlotsManager;
@@ -38,6 +45,12 @@ public class BillingDeskInputSlot : MonoBehaviour, IInteractableObject {
         containingItem.transform.parent = freeOutputSlot.transform;
         StartCoroutine(containingItem.AnimateItemToSlot(freeOutputSlot.transform.position, Quaternion.identity));
         collider.enabled = false;
+
+        OnItemScanned?.Invoke(this, new OnItemScannedEventArgs {
+            itemPriceAmount = containingItem.GetItemSO().currentPrice
+        });
+        containingItem = null;
+        isContainingItem = false;
 
         billingDeskItemSlotsManager.DecreaseRemainingItemsToScan();
     }

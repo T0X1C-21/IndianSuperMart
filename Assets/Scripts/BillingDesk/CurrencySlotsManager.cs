@@ -1,6 +1,13 @@
+using System;
 using UnityEngine;
 
 public class CurrencySlotsManager : MonoBehaviour {
+
+
+    public event EventHandler<OnGivingAmountAddedEventArgs> OnGivingAmountAdded;
+    public class OnGivingAmountAddedEventArgs : EventArgs {
+        public int givingAmountAdded;
+    }
 
 
     [SerializeField] private CurrencySlot[] coinCurrencySlots;
@@ -9,6 +16,10 @@ public class CurrencySlotsManager : MonoBehaviour {
 
     public Vector3 AddCurrencyAndGetPosition(Currency currency, out Transform parentTransform) {
         CurrencyType currencyType = currency.GetCurrencySO().currencyType;
+
+        OnGivingAmountAdded.Invoke(this, new OnGivingAmountAddedEventArgs {
+            givingAmountAdded = currency.GetCurrencySO().currencyAmount
+        });
 
         Vector3 positionToReturn;
         if (currencyType == CurrencyType.Coin) {

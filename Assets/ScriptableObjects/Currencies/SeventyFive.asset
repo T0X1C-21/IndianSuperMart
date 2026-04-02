@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SeventyFive
   m_EditorClassIdentifier: Assembly-CSharp::CurrencySO
   gameObject: {fileID: 2789776349907687601, guid: 9c6f3ad3612d8f44d90726692bbb2a85, type: 3}
+  currencyAmount: 75
   currencyType: 1
   currencyValue: 7
   stackOffset: 0.0015

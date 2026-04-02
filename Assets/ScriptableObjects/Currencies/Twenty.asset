@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Twenty
   m_EditorClassIdentifier: Assembly-CSharp::CurrencySO
   gameObject: {fileID: 8491687511537025344, guid: 864a7f7732e4ce94fa90ec09059f2c68, type: 3}
+  currencyAmount: 20
   currencyType: 0
   currencyValue: 4
   stackOffset: 0.00675
